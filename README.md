@@ -6,7 +6,6 @@
 - example.cpp: simple thread process
 
 ### Content
-- header only
 - no lock in read process without spin.
 
 ### TODO
