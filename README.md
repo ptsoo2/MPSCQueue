@@ -14,7 +14,6 @@
 
 ## EXAMPLE
 ```c
-#include <conio.h>
 #include <thread>
 
 TSUtil::CMPSCQueue<size_t> queue;
