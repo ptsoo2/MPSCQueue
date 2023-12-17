@@ -1,8 +1,8 @@
 #pragma once
 
 /*
-*	_mm_pause						: https://yonmy.com/archives/99 (´ë±â ¼Óµµ¸¦ ´ÊÃãÀ¸·Î½á ÆÄÀÌÇÁ¶óÀÎÀÇ ´õ ÀûÀº ºÎºĞÀ» »ç¿ë)// °Ì³ªÀÛÀº sleep ÀÌ¶ó »ı°¢ÇÏ¸é µÈ´Ù. (us(¸¶ÀÌÅ©·Î¼¼ÄÁÁî) ´ÜÀ§)
-* 	(¸®´ª½º¿¡¼­ÀÇ »ç¿ë)				: https://stackoverflow.com/questions/7371869/minimum-time-a-thread-can-pause-in-linux
+*	_mm_pause						: https://yonmy.com/archives/99 (ëŒ€ê¸° ì†ë„ë¥¼ ëŠ¦ì¶¤ìœ¼ë¡œì¨ íŒŒì´í”„ë¼ì¸ì˜ ë” ì ì€ ë¶€ë¶„ì„ ì‚¬ìš©)// ê²ë‚˜ì‘ì€ sleep ì´ë¼ ìƒê°í•˜ë©´ ëœë‹¤. (us(ë§ˆì´í¬ë¡œì„¸ì»¨ì¦ˆ) ë‹¨ìœ„)
+* 	(ë¦¬ëˆ…ìŠ¤ì—ì„œì˜ ì‚¬ìš©)				: https://stackoverflow.com/questions/7371869/minimum-time-a-thread-can-pause-in-linux
 */
 
 #include <atomic>
@@ -14,7 +14,7 @@ namespace TSUtil
 	{
 		enum
 		{
-			MAX_SPIN_COUNT = 1 << 14, // 128
+			MAX_SPIN_COUNT = 1 << 7, // 128
 		};
 
 	public:
@@ -24,8 +24,8 @@ namespace TSUtil
 	public:
 		bool try_lock()
 		{
-			// memory_order_acquire : ¸ğµç ¸Ş¸ğ¸® ¸í·ÉµéÀÌ ÀÌ ½ÃÁ¡ ÀÌÀüÀ¸·Î Àç¹èÄ¡ µÇ´Â °ÍÀ» ±İÁöÇÑ´Ù.
-			// test_and_set			: ºñ±³ ÈÄ true(1) ·Î ÀüÈ¯
+			// memory_order_acquire : ëª¨ë“  ë©”ëª¨ë¦¬ ëª…ë ¹ë“¤ì´ ì´ ì‹œì  ì´ì „ìœ¼ë¡œ ì¬ë°°ì¹˜ ë˜ëŠ” ê²ƒì„ ê¸ˆì§€í•œë‹¤.
+			// test_and_set			: ë¹„êµ í›„ true(1) ë¡œ ì „í™˜
 			return flag_.test_and_set(std::memory_order_acquire) == false;
 		}
 
@@ -45,7 +45,7 @@ namespace TSUtil
 
 		void unlock()
 		{
-			// flag_ = false; ¿Í °°´Ù.
+			// flag_ = false; ì™€ ê°™ë‹¤.
 			flag_.clear();
 		}
 
@@ -74,7 +74,7 @@ namespace TSUtil
 
 		inline static void _pause()
 		{
-			// ¾Æ.. gcc ¿¡¼± ¸ø¾²´Âµí..?
+			// ì•„.. gcc ì—ì„  ëª»ì“°ëŠ”ë“¯..?
 
 #ifdef _MSC_VER
 			_mm_pause();
