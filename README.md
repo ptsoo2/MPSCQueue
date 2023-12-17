@@ -2,6 +2,7 @@
 
 Directory
 - header only
+- no lock in read process without spin.
 - include: source file
 - example: simple thread process
 
