@@ -1,10 +1,13 @@
 # MPSCQueue
 
-Directory
+### Directory
+- header only
+- include: source file
+- example.cpp: simple thread process
+
+### Content
 - header only
 - no lock in read process without spin.
-- include: source file
-- example: simple thread process
 
 ### TODO
 - 
