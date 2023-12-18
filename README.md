@@ -6,7 +6,9 @@
 - example.cpp: simple thread process
 
 ### Content
-- no lock in read process without spin.
+- MultiThread 환경의 생산자-소비자 관계에서 사용할 수 있는 Queue
+- 소비자 Thread 는 단일이여야함
+- Read 작업에서 spinlock 을 제외하고는 lock 이 없는 구현 방식
 
 ### TODO
 - 
